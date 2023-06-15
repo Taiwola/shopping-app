@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
     interface Req extends Request {
         session?: any;
         currentUser?: any;
+        uploaderError?: Error
       }
   }
 
