@@ -33,8 +33,8 @@ export class Uploader {
     });
 
 
-    public defualtUploadDir = "/upload";
-    constructor(public uploadDir: string) {}
+    public defualtUploadDir = "upload/";
+    constructor(public uploadDir?: string) {}
 
 
     uploadMultipleFiles(options: UploaderOptions) {

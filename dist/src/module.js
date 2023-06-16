@@ -44,6 +44,7 @@ const cookie_session_1 = __importDefault(require("cookie-session"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const index_1 = require("./common/src/index");
 const auth_routes_1 = require("./auth/auth.routes");
+const index_2 = require("./common/src/index");
 class AppModule {
     constructor(app) {
         this.app = app;
@@ -60,10 +61,6 @@ class AppModule {
             signed: false,
             secure: false,
         }));
-        // use routers
-        app.use("/api/auth", auth_routes_1.authRouter);
-        // use error handler
-        app.use(index_1.errorHandler);
         Object.setPrototypeOf(this, AppModule.prototype);
     }
     start() {
@@ -81,6 +78,11 @@ class AppModule {
             catch (error) {
                 throw new Error("mongodb connection error");
             }
+            // use routers
+            this.app.use((0, index_2.currentUser)(process.env.JWT_SECRET_KEY));
+            this.app.use("/api/auth", auth_routes_1.authRouter);
+            // use error handler
+            this.app.use(index_1.errorHandler);
             this.app.listen(8080, () => console.log("SERVER LISTENING AT PORT:8080"));
         });
     }

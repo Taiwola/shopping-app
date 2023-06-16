@@ -1,5 +1,2 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadDir = void 0;
-;
-exports.uploadDir = 'upload/';

@@ -33,7 +33,7 @@ class Uploader {
                 cb(null, file.fieldname + Date.now());
             }
         });
-        this.defualtUploadDir = "/upload";
+        this.defualtUploadDir = "upload/";
     }
     uploadMultipleFiles(options) {
         let fieldname = (options === null || options === void 0 ? void 0 : options.fieldName) ? options.fieldName : 'file';
