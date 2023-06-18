@@ -14,7 +14,7 @@ export class ProductService {
   constructor(public productModel: ProductModel) {}
 
   async getOneById(productId: string) {
-    return this.productModel.findById({ _id: productId });
+    return await this.productModel.findOne({_id: productId });
   }
 
   async create(createProduct: CreateProductDto) {

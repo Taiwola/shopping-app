@@ -17,7 +17,10 @@ export * from "./errors/custom-error";
 
 // interfaces
 export * from "./constants/auth/user.interfaces";
-export * from "./constants/seller/product.interfaces"
+export * from "./constants/seller/product.interfaces";
+export * from "./constants/buyer/cart.interface";
+export * from "./constants/buyer/cart-product.interfaces";
+export * from "./constants/order/order.interface"
 
 // services
 export * from "./services/authentication.service";

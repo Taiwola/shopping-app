@@ -10,6 +10,7 @@ import { errorHandler } from "./common/src/index";
 import { authRouter } from "./auth/auth.routes";
 import { currentUser } from "./common/src/index";
 import { sellerRouter } from "./seller/seller.router";
+import { buyerRouter } from "./buyer/buyer.router";
 
 export class AppModule {
   constructor(public app: Application) {
@@ -19,8 +20,8 @@ export class AppModule {
     app.use(
       cors({
         origin: "*",
-        credentials: true,
-        optionsSuccessStatus: 200,
+        // credentials: true,
+        // optionsSuccessStatus: 200,
       })
     );
 
@@ -45,6 +46,10 @@ export class AppModule {
       throw new Error("secret key must be defined");
     }
 
+    if(!process.env.STRIPE_KEY){
+      throw new Error("Stripe key is Required")
+    }
+
     try {
       await mongoose.connect(process.env.MONGODB_URL);
       console.log("connected to DB");
@@ -55,7 +60,8 @@ export class AppModule {
     // use routers
     this.app.use(currentUser(process.env.JWT_SECRET_KEY!));
     this.app.use("/api/auth", authRouter);
-    this.app.use("api/seller", sellerRouter)
+    this.app.use("api/seller", sellerRouter);
+    this.app.use("api/buyer", buyerRouter);
 
     // use error handler
     this.app.use(errorHandler);
